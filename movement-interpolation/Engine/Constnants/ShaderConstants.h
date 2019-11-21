@@ -10,4 +10,5 @@ public:
 	static std::string MODEL_MTX;
 	static std::string VIEW_MTX;
 	static std::string PROJECTION_MTX;
+	static std::string OPACITY;
 };

@@ -17,4 +17,5 @@ public:
 	void Render();
 
 	void StartAnimation();
+	void SetCurrentPosition(float timePercentage);
 };

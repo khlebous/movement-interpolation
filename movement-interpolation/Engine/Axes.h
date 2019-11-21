@@ -21,7 +21,7 @@ public:
 
 	void SetShader(std::shared_ptr<Shader> _s) { shader = _s; }
 
-	void Render(glm::vec3 pos);
+	void Render(glm::vec3 pos, float opacity);
 
 private:
 	void GenerateBuffors();

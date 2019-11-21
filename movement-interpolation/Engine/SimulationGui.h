@@ -5,13 +5,17 @@
 class SimulationGui
 {
 	std::shared_ptr<Simulation> simulation;
-	char progressBuf[32];
+	float animationPercentage;
 
 public:
-	SimulationGui() { }
+	SimulationGui();
 	~SimulationGui() { }
 
 	void SetSimulation(std::shared_ptr<Simulation> _s) { simulation = _s; }
 
 	void Render();
+
+private:
+	void PushDisabled();
+	void PopDisabled();
 };

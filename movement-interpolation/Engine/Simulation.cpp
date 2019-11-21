@@ -12,6 +12,8 @@ void Simulation::Update(float deltaTime)
 		model->currentTime = model->animationTime;
 		model->isRunning = false;
 	}
+
+	SetCurrentPosition(model->currentTime / model->animationTime);
 }
 
 void Simulation::Render()
@@ -23,4 +25,9 @@ void Simulation::StartAnimation()
 {
 	model->isRunning = true;
 	model->currentTime = 0.0f;
+}
+
+void Simulation::SetCurrentPosition(float timePercentage)
+{
+	model->currPos = (model->endPos - model->startPos) * timePercentage + model->startPos;
 }

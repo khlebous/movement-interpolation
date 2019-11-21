@@ -14,10 +14,11 @@ Axes::~Axes()
 	glDeleteBuffers(1, &EBO);
 }
 
-void Axes::Render(glm::vec3 pos)
+void Axes::Render(glm::vec3 pos, float opacity)
 {
 	shader->use();
 	shader->setMat4(ShaderConstants::MODEL_MTX, glm::translate(model, pos));
+	shader->setFloat(ShaderConstants::OPACITY, opacity);
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_LINES, indices_size, GL_UNSIGNED_INT, 0);
