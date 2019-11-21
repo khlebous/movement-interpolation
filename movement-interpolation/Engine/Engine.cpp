@@ -32,7 +32,7 @@ void Engine::UpdateCameraMatrices()
 	camera->UpdateViewMatrix();
 }
 
-void UpdateShader()
+void Engine::UpdateShader()
 {
 	shader->use();
 	shader->setMat4(ShaderConstants::VIEW_MTX, camera->View);
