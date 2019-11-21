@@ -3,7 +3,6 @@
 Axes::Axes()
 {
 	model = glm::mat4(1);
-	position = glm::vec3(0);
 
 	GenerateBuffors();
 }
@@ -15,10 +14,10 @@ Axes::~Axes()
 	glDeleteBuffers(1, &EBO);
 }
 
-void Axes::Render()
+void Axes::Render(glm::vec3 pos)
 {
 	shader->use();
-	shader->setMat4(ShaderConstants::MODEL_MTX, glm::translate(model, position));
+	shader->setMat4(ShaderConstants::MODEL_MTX, glm::translate(model, pos));
 
 	glBindVertexArray(VAO);
 	glDrawElements(GL_LINES, indices_size, GL_UNSIGNED_INT, 0);

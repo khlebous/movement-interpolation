@@ -139,6 +139,10 @@
     <ClCompile Include="Engine\Constnants\WindowConstants.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Gui.cpp" />
+    <ClCompile Include="Engine\Simulation.cpp" />
+    <ClCompile Include="Engine\SimulationGui.cpp" />
+    <ClCompile Include="Engine\SimulationModel.cpp" />
+    <ClCompile Include="Engine\SimulationView.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_chart.cpp" />
@@ -150,7 +154,6 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Axis.h" />
     <ClInclude Include="Engine\Axes.h" />
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\CameraGui.h" />
@@ -160,6 +163,10 @@
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Gui.h" />
     <ClInclude Include="Engine\MovementDirection.h" />
+    <ClInclude Include="Engine\Simulation.h" />
+    <ClInclude Include="Engine\SimulationGui.h" />
+    <ClInclude Include="Engine\SimulationModel.h" />
+    <ClInclude Include="Engine\SimulationView.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_chart.h" />
     <ClInclude Include="ImGui\imgui_impl_glfw.h" />

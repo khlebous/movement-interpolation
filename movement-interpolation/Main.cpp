@@ -82,6 +82,9 @@ int main()
 	glEnable(GL_PROGRAM_POINT_SIZE);
 	glEnable(GL_SCISSOR_TEST);
 	glLineWidth(5);
+	glEnable(GL_BLEND); //Enable blending.
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //Set blending function.
+
 	//init
 	engine = std::make_shared<Engine>();
 
