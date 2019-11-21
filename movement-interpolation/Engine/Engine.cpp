@@ -23,7 +23,7 @@ Engine::Engine() :
 	cameraGui->SetCamera(camera);
 	
 	auto simulationGui = std::make_shared<SimulationGui>();
-	simulationGui->SetModel(simulationModel);
+	simulationGui->SetSimulation(simulation);
 
 	gui->SetCameraGui(cameraGui);
 	gui->SetSimulationGui(simulationGui);

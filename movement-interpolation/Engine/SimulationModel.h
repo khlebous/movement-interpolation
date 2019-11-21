@@ -9,10 +9,10 @@ public:
 	glm::vec3 startPos;
 	glm::vec3 endPos;
 
+	bool isRunning;
 	float animationTime;
+	float currentTime;
 
-	SimulationModel() : startPos(glm::vec3(0)), endPos(glm::vec3(2, 1, 0)), animationTime(3) { }
+	SimulationModel();
 	~SimulationModel() { }
-
-	void Update(float deltaTime) { }
 };

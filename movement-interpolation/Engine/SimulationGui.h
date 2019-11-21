@@ -1,16 +1,17 @@
 #pragma once
 #include "..//ImGui/imgui.h"
-#include "SimulationModel.h"
+#include "Simulation.h"
 
 class SimulationGui
 {
-	std::shared_ptr<SimulationModel> model;
+	std::shared_ptr<Simulation> simulation;
+	char progressBuf[32];
 
 public:
 	SimulationGui() { }
 	~SimulationGui() { }
 
-	void SetModel(std::shared_ptr<SimulationModel> _sm) { model = _sm; }
+	void SetSimulation(std::shared_ptr<Simulation> _s) { simulation = _s; }
 
 	void Render();
 };
