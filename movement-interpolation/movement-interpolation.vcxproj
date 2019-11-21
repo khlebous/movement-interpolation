@@ -131,7 +131,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Engine\Axes.cpp" />
+    <ClCompile Include="Engine\Camera.cpp" />
+    <ClCompile Include="Engine\CameraGui.cpp" />
+    <ClCompile Include="Engine\Constnants\ColorConstants.cpp" />
+    <ClCompile Include="Engine\Constnants\ShaderConstants.cpp" />
     <ClCompile Include="Engine\Constnants\WindowConstants.cpp" />
+    <ClCompile Include="Engine\Engine.cpp" />
+    <ClCompile Include="Engine\Gui.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_chart.cpp" />
@@ -143,7 +150,16 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Axis.h" />
+    <ClInclude Include="Engine\Axes.h" />
+    <ClInclude Include="Engine\Camera.h" />
+    <ClInclude Include="Engine\CameraGui.h" />
+    <ClInclude Include="Engine\Constnants\ColorConstants.h" />
+    <ClInclude Include="Engine\Constnants\ShaderConstants.h" />
     <ClInclude Include="Engine\Constnants\WindowConstants.h" />
+    <ClInclude Include="Engine\Engine.h" />
+    <ClInclude Include="Engine\Gui.h" />
+    <ClInclude Include="Engine\MovementDirection.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_chart.h" />
     <ClInclude Include="ImGui\imgui_impl_glfw.h" />
@@ -152,6 +168,10 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\Resources\Shaders\PointerShader.fs" />
+    <None Include="Engine\Resources\Shaders\PointerShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

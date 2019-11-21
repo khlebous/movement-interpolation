@@ -16,20 +16,29 @@
     <Filter Include="Header Files\ImGui">
       <UniqueIdentifier>{ced18ce2-f62f-4954-a726-0fe5da91f78a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\ImGui">
-      <UniqueIdentifier>{186accb8-8470-40b4-a461-560261486d0e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Engine">
       <UniqueIdentifier>{5b33548a-b2e9-41ed-ba8e-26f806384146}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files\Engine\Constants">
       <UniqueIdentifier>{d3925bd9-93e6-4863-ac88-681cd57bd41a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Engine">
+    <Filter Include="Source Files\Engine">
       <UniqueIdentifier>{f04f3dd3-b4d9-466e-a6f0-c9019c0fc98b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Engine\Constants">
+    <Filter Include="Source Files\Engine\Constants">
       <UniqueIdentifier>{c6909102-f548-44d5-b55a-4d0f5e9d9df5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ImGui">
+      <UniqueIdentifier>{186accb8-8470-40b4-a461-560261486d0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Shaders">
+      <UniqueIdentifier>{4ccc52f9-2963-4f7e-9764-edd20d8367ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Gui">
+      <UniqueIdentifier>{d3bcd131-cb0b-453a-9683-8fb839b05103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Gui">
+      <UniqueIdentifier>{d02e43d2-402a-491b-986e-319a5388f1f9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -40,28 +49,49 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_chart.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_demo.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_draw.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_glfw.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_impl_opengl2.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="ImGui\imgui_widgets.cpp">
-      <Filter>Resource Files\ImGui</Filter>
+      <Filter>Source Files\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Constnants\WindowConstants.cpp">
-      <Filter>Header Files\Engine\Constants</Filter>
+      <Filter>Source Files\Engine\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Engine.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Constnants\ShaderConstants.cpp">
+      <Filter>Source Files\Engine\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Gui.cpp">
+      <Filter>Source Files\Engine\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CameraGui.cpp">
+      <Filter>Source Files\Engine\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Constnants\ColorConstants.cpp">
+      <Filter>Source Files\Engine\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Axes.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Camera.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,5 +122,40 @@
     <ClInclude Include="Engine\Constnants\WindowConstants.h">
       <Filter>Header Files\Engine\Constants</Filter>
     </ClInclude>
+    <ClInclude Include="Axis.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Camera.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Engine.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Constnants\ShaderConstants.h">
+      <Filter>Header Files\Engine\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Gui.h">
+      <Filter>Header Files\Engine\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CameraGui.h">
+      <Filter>Header Files\Engine\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Axes.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Constnants\ColorConstants.h">
+      <Filter>Header Files\Engine\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\MovementDirection.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\Resources\Shaders\PointerShader.fs">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
+    <None Include="Engine\Resources\Shaders\PointerShader.vs">
+      <Filter>Resource Files\Shaders</Filter>
+    </None>
   </ItemGroup>
 </Project>
