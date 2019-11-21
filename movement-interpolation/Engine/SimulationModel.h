@@ -11,7 +11,7 @@ public:
 
 	float animationTime;
 
-	SimulationModel() : startPos(glm::vec3(0)), endPos(glm::vec3(0)), animationTime(3) { }
+	SimulationModel() : startPos(glm::vec3(0)), endPos(glm::vec3(2, 1, 0)), animationTime(3) { }
 	~SimulationModel() { }
 
 	void Update(float deltaTime) { }
