@@ -10,6 +10,7 @@
 #include <iostream>
 
 #include "Engine/Constnants/WindowConstants.h"
+#include "Engine/Engine.h"
 
 //
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
@@ -29,7 +30,9 @@ bool first_mouse = true;
 float delta_time = 0.0f;
 float last_frame = 0.0f;
 
-bool show_demo_window = true;
+bool show_demo_window = false;
+
+std::shared_ptr<Engine> engine;
 
 int main()
 {
@@ -39,7 +42,7 @@ int main()
 
 	// glfw window creation
 	// --------------------
-	GLFWwindow* window = glfwCreateWindow(WindowConstants::WIDTH, WindowConstants::HEIGHT, "Milling Machine", NULL, NULL);
+	GLFWwindow* window = glfwCreateWindow(WindowConstants::WIDTH, WindowConstants::HEIGHT, "movement interpolation", NULL, NULL);
 	if (window == NULL)
 	{
 		std::cout << "Failed to create GLFW window" << std::endl;
@@ -77,6 +80,10 @@ int main()
 	glEnable(GL_DEPTH_TEST);
 	glClearColor(0.635f, 0.682f, 0.6f, 1.0f);
 	glEnable(GL_PROGRAM_POINT_SIZE);
+	glEnable(GL_SCISSOR_TEST);
+	glLineWidth(5);
+	//init
+	engine = std::make_shared<Engine>();
 
 	// render loop
 	// -----------
@@ -91,12 +98,22 @@ int main()
 
 		glfwPollEvents();
 
+		glScissor(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0);
+		glViewport(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
+		glClearColor(0.635f, 0.682f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glViewport(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT);
 
 		// render
 		// ------
+		engine->Render(delta_time);
+
+		glScissor(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
+		glViewport(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
+		glClearColor(0.735f, 0.782f, 0.6f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
+		engine->Render(delta_time);
+
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
@@ -110,6 +127,7 @@ int main()
 			ImGui::ShowDemoWindow();
 
 		// ImGui Rendering
+		engine->RenderGui();
 		
 		ImGui::Render();
 		ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
@@ -136,18 +154,18 @@ void process_input(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	/*if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		sceneController->GetCamera()->ProcessKeyboard(FORWARD, delta_time);
+	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+		engine->GetCamera()->ProcessKeyboard(FORWARD, delta_time);
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		sceneController->GetCamera()->ProcessKeyboard(BACKWARD, delta_time);
+		engine->GetCamera()->ProcessKeyboard(BACKWARD, delta_time);
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		sceneController->GetCamera()->ProcessKeyboard(LEFT, delta_time);
+		engine->GetCamera()->ProcessKeyboard(LEFT, delta_time);
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		sceneController->GetCamera()->ProcessKeyboard(RIGHT, delta_time);
+		engine->GetCamera()->ProcessKeyboard(RIGHT, delta_time);
 	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
-		sceneController->GetCamera()->ProcessKeyboard(DOWN, delta_time);
+		engine->GetCamera()->ProcessKeyboard(DOWN, delta_time);
 	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
-		sceneController->GetCamera()->ProcessKeyboard(UP, delta_time);*/
+		engine->GetCamera()->ProcessKeyboard(UP, delta_time);
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -182,7 +200,7 @@ void mouse_callback(GLFWwindow* window, double xpos, double ypos)
 	if (!mouse_right_button_down)
 		return;
 
-	//sceneController->GetCamera()->ProcessMouseMovement(xoffset, yoffset);
+	engine->GetCamera()->ProcessMouseMovement(xoffset, yoffset);
 }
 
 void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
@@ -200,5 +218,5 @@ void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-	//sceneController->GetCamera()->ProcessMouseScroll(yoffset);
+	engine->GetCamera()->ProcessMouseScroll(yoffset);
 }
