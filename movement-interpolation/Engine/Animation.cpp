@@ -25,9 +25,9 @@ void Animation::Update(float deltaTime)
 	eModel->current.rotation = (eModel->end.rotation - eModel->start.rotation) * timePercentage + eModel->start.rotation;
 }
 
-void Animation::Render()
+void Animation::Render(AnimationModelType type)
 {
-	view->Render();
+	view->Render(type);
 }
 
 void Animation::StartAnimation()

@@ -13,13 +13,25 @@ Engine::Engine() :
 	std::shared_ptr<AnimationView> animationView = std::make_shared<AnimationView>();
 	animationView->SetGameObject(axes);
 
+	glm::vec3 startPos = glm::vec3(0);
+	glm::vec3 startRot = glm::vec3(0);
+
+	glm::vec3 endPos = glm::vec3(4, 1, 0);
+	glm::vec3 endRot = glm::vec3(20, 30, 40);
+
 	auto animationEulerModel = std::make_shared<AnimationModel<glm::vec3>>(
-		Configuration<glm::vec3>(glm::vec3(0), glm::vec3(0)),
-		Configuration<glm::vec3>(glm::vec3(4, 1, 0), glm::vec3(20, 30 ,40)));
+		Configuration<glm::vec3>(startPos, startRot),
+		Configuration<glm::vec3>(endPos, endRot));
 	animationView->SetAnimationEulerModel(animationEulerModel);
+
+	auto animationQuatModel = std::make_shared<AnimationModel<glm::quat>>(
+		Configuration<glm::quat>(startPos, glm::quat(startRot)),
+		Configuration<glm::quat>(endPos, glm::quat(endRot)));
+	animationView->SetAnimationQuatModel(animationQuatModel);
 
 	animation->SetView(animationView);
 	animation->SetEulerModel(animationEulerModel);
+	animation->SetQuatModel(animationQuatModel);
 	
 	auto cameraGui = std::make_shared<CameraGui>();
 	cameraGui->SetCamera(camera);
@@ -31,13 +43,17 @@ Engine::Engine() :
 	gui->SetAnimationGui(animationGui);
 }
 
-void Engine::Render(float deltaTime)
+void Engine::Update(float deltaTime)
 {
 	UpdateCameraMatrices();
 	UpdateShader();
 
 	animation->Update(deltaTime);
-	animation->Render();
+}
+
+void Engine::Render(AnimationModelType type)
+{
+	animation->Render(type);
 }
 
 void Engine::RenderGui()

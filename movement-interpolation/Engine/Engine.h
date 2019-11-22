@@ -18,7 +18,8 @@ public:
 
 	std::shared_ptr<Camera> GetCamera() { return camera; }
 
-	void Render(float deltaTime);
+	void Update(float deltaTime);
+	void Render(AnimationModelType type);
 	void RenderGui();
 
 private:

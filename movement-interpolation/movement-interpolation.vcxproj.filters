@@ -182,6 +182,9 @@
     <ClInclude Include="Engine\AnimationGui.h">
       <Filter>Header Files\Engine\Gui</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\AnimationModelType.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Resources\Shaders\PointerShader.fs">

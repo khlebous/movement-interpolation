@@ -12,7 +12,6 @@ class Axes
 {
 	unsigned int VAO, VBO, EBO;
 	std::shared_ptr<Shader> shader;
-	glm::mat4 model;
 
 	const int indices_size = 6;
 
@@ -22,7 +21,7 @@ public:
 
 	void SetShader(std::shared_ptr<Shader> _s) { shader = _s; }
 
-	void Render(const Configuration<glm::vec3>& configuration, float opacity);
+	void Render(glm::mat4 model, float opacity);
 
 private:
 	void GenerateBuffors();

@@ -154,6 +154,7 @@
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Engine\AnimationModelType.h" />
     <ClInclude Include="Engine\Axes.h" />
     <ClInclude Include="Engine\Camera.h" />
     <ClInclude Include="Engine\CameraGui.h" />
