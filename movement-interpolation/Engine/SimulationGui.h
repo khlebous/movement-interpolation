@@ -6,6 +6,7 @@ class SimulationGui
 {
 	std::shared_ptr<Simulation> simulation;
 	float animationPercentage;
+	int intermediateFramesCount;
 
 public:
 	SimulationGui();

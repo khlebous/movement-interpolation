@@ -15,25 +15,25 @@ Axes::~Axes()
 	glDeleteBuffers(1, &EBO);
 }
 
-void Axes::Render(glm::vec3 pos, glm::vec3 rot, float opacity)
+void Axes::Render(const Configuration<glm::vec3>& configuration, float opacity)
 {
 	shader->use();
 
 	glm::mat4 m_model;
 
-	float rad_x = glm::radians(rot.x);
+	float rad_x = glm::radians(configuration.rotation.x);
 	float s1 = glm::sin(rad_x);
 	float c1 = glm::cos(rad_x);
-	float rad_y = glm::radians(rot.y);
+	float rad_y = glm::radians(configuration.rotation.y);
 	float s2 = glm::sin(rad_y);
 	float c2 = glm::cos(rad_y);
-	float rad_z = glm::radians(rot.z);
+	float rad_z = glm::radians(configuration.rotation.z);
 	float s3 = glm::sin(rad_z);
 	float c3 = glm::cos(rad_z);
 
-	m_model = glm::transpose(glm::mat4(c2 * c3, -s2, c2 * s3, pos.x,
-		s1 * s3 + c1 * c3 * s2, c1 * c2, c1 * s2 * s3 - c3 * s1, pos.y,
-		c3 * s1 * s2 - c1 * s3, c2 * s1, c1 * c3 + s1 * s2 * s3, pos.z,
+	m_model = glm::transpose(glm::mat4(c2 * c3, -s2, c2 * s3, configuration.position.x,
+		s1 * s3 + c1 * c3 * s2, c1 * c2, c1 * s2 * s3 - c3 * s1, configuration.position.y,
+		c3 * s1 * s2 - c1 * s3, c2 * s1, c1 * c3 + s1 * s2 * s3, configuration.position.z,
 		0, 0, 0, 1));
 
 	/*m_model = glm::translate(glm::mat4(1), pos);

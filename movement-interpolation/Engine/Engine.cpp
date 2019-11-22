@@ -1,4 +1,5 @@
 #include "Engine.h"
+#include "Configuration.h"
 
 Engine::Engine() :
 	camera(std::make_shared<Camera>(glm::vec3(1.0f, 0.5f, 5.0f), -90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f))),
@@ -12,12 +13,13 @@ Engine::Engine() :
 	std::shared_ptr<SimulationView> simulationView = std::make_shared<SimulationView>();
 	simulationView->SetGameObject(axes);
 
-	auto simulationModel = std::make_shared<SimulationModel>();
-	simulationView->SetSimulationModel(simulationModel);
+	auto simulationEulerModel = std::make_shared<SimulationModel<glm::vec3>>(
+		Configuration<glm::vec3>(glm::vec3(0), glm::vec3(0)),
+		Configuration<glm::vec3>(glm::vec3(4, 1, 0), glm::vec3(20, 30 ,40)));
+	simulationView->SetSimulationEulerModel(simulationEulerModel);
 
 	simulation->SetView(simulationView);
-	simulation->SetModel(simulationModel);
-
+	simulation->SetEulerModel(simulationEulerModel);
 	
 	auto cameraGui = std::make_shared<CameraGui>();
 	cameraGui->SetCamera(camera);

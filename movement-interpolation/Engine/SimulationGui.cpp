@@ -8,62 +8,65 @@
 SimulationGui::SimulationGui()
 {
 	animationPercentage = 0.0f;
+	intermediateFramesCount = 0;
 }
 
 void SimulationGui::Render()
 {
-	std::shared_ptr<SimulationModel> model = simulation->GetModel();
+	std::shared_ptr<SimulationModel<glm::vec3>> model = simulation->GetModel();
 
 	bool disabledPushed = false;
-	if (model->isRunning)
+	bool configurationChanged = false;
+	
+	if (simulation->isRunning)
 	{
 		PushDisabled();
 		disabledPushed = true;
 
-		animationPercentage = model->currentTime / model->animationTime;
-		animationPercentage = model->currentTime / model->animationTime;
+		animationPercentage = simulation->currentTime / simulation->animationTime;
 	}
 
-	if (ImGui::DragFloat("animation time", &model->animationTime, 0.1f))
+	if (ImGui::DragFloat("animation time", &simulation->animationTime, 0.1f))
 	{
-		if (model->animationTime < 0)
-			model->animationTime = 0;
+		if (simulation->animationTime < 0)
+			simulation->animationTime = 0;
 	}
+
+	if (ImGui::DragInt("intermediate framescount", &intermediateFramesCount, 1))
+	{
+		if (intermediateFramesCount < 0)
+			intermediateFramesCount = 0;
+
+		configurationChanged = true;
+	}
+
+	if (ImGui::SliderFloat("##AnimationPercentage", &animationPercentage, 0, 1.0f))
+		configurationChanged = true;
+
+	if (ImGui::DragFloat3("start pos", &model->start.position[0], 0.1f))
+		configurationChanged = true;
+
+	if (ImGui::DragFloat3("start rotation", &model->start.rotation[0], 0.1f))
+		configurationChanged = true;
+
+	if (ImGui::DragFloat3("end pos", &model->end.position[0], 0.1f))
+		configurationChanged = true;
+
+	if (ImGui::DragFloat3("end rotation", &model->end.rotation[0], 0.1f))
+		configurationChanged = true;
 
 	if (ImGui::Button("Start animation"))
 	{
 		simulation->StartAnimation();
 	}
 
-	if (ImGui::SliderFloat("##AnimationPercentage", &animationPercentage, 0, 1.0f))
-	{
-		simulation->SetCurrentPosition(animationPercentage);
-	}
-
-	if (ImGui::DragFloat3("start pos", &model->startPos[0], 0.1f))
-	{
-		simulation->SetCurrentPosition(animationPercentage);
-	}
-
-	if (ImGui::DragFloat3("start rotation", &model->startRot[0], 0.1f))
-	{
-		simulation->SetCurrentPosition(animationPercentage);
-	}
-
-	if (ImGui::DragFloat3("end pos", &model->endPos[0], 0.1f))
-	{
-		simulation->SetCurrentPosition(animationPercentage);
-	}
-
-	if (ImGui::DragFloat3("end rotation", &model->endRot[0], 0.1f))
-	{
-		simulation->SetCurrentPosition(animationPercentage);
-	}
-
 	if (disabledPushed)
 	{
 		PopDisabled();
 	}
+
+	if (configurationChanged)
+		simulation->RecalculateConfiguration(animationPercentage, intermediateFramesCount);
 }
 
 void SimulationGui::PushDisabled()

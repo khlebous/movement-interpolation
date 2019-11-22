@@ -2,8 +2,12 @@
 
 void SimulationView::Render()
 {
-	gameObject->Render(model->currPos, model->currRot, 1.0f);
+	gameObject->Render(model->current, 1.0f);
+	gameObject->Render(model->start, 0.7f);
+	gameObject->Render(model->end, 0.7f);
 
-	gameObject->Render(model->startPos, model->startRot, 0.3f);
-	gameObject->Render(model->endPos, model->endRot, 0.3f);
+	for (size_t i = 0; i < model->intermediate.size(); i++)
+	{
+		gameObject->Render(model->intermediate[i], 0.4f);
+	}
 }

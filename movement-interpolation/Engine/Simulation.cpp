@@ -1,19 +1,28 @@
 #include "Simulation.h"
 
+Simulation::Simulation()
+{
+	isRunning = false;
+	animationTime = 3.0f;
+	currentTime = 0.0f;
+}
+
 void Simulation::Update(float deltaTime)
 {
-	if (!model->isRunning)
+	if (!isRunning)
 		return;
 
-	model->currentTime += deltaTime;
+	currentTime += deltaTime;
 
-	if (model->currentTime >= model->animationTime)
+	if (currentTime >= animationTime)
 	{
-		model->currentTime = model->animationTime;
-		model->isRunning = false;
+		currentTime = animationTime;
+		isRunning = false;
 	}
 
-	SetCurrentPosition(model->currentTime / model->animationTime);
+	float timePercentage = currentTime / animationTime;
+	eModel->current.position = (eModel->end.position - eModel->start.position) * timePercentage + eModel->start.position;
+	eModel->current.rotation = (eModel->end.rotation - eModel->start.rotation) * timePercentage + eModel->start.rotation;
 }
 
 void Simulation::Render()
@@ -23,12 +32,21 @@ void Simulation::Render()
 
 void Simulation::StartAnimation()
 {
-	model->isRunning = true;
-	model->currentTime = 0.0f;
+	isRunning = true;
+	currentTime = 0.0f;
 }
 
-void Simulation::SetCurrentPosition(float timePercentage)
+void Simulation::RecalculateConfiguration(float timePercentage, float intermediateFramesCount)
 {
-	model->currPos = (model->endPos - model->startPos) * timePercentage + model->startPos;
-	model->currRot = (model->endRot - model->startRot) * timePercentage + model->startRot;
+	eModel->current.position = (eModel->end.position - eModel->start.position) * timePercentage + eModel->start.position;
+	eModel->current.rotation = (eModel->end.rotation - eModel->start.rotation) * timePercentage + eModel->start.rotation;
+
+	eModel->intermediate.resize(intermediateFramesCount);
+
+	for (size_t i = 0; i < intermediateFramesCount; i++)
+	{
+		float timePercentage = (i + 1.0f) / (intermediateFramesCount + 1.0f);
+		eModel->intermediate[i].position = (eModel->end.position - eModel->start.position) * timePercentage + eModel->start.position;
+		eModel->intermediate[i].rotation = (eModel->end.rotation - eModel->start.rotation) * timePercentage + eModel->start.rotation;
+	}
 }

@@ -6,6 +6,7 @@
 
 #include "Shader.h"
 #include "Constnants/ColorConstants.h"
+#include "Configuration.h"
 
 class Axes
 {
@@ -21,7 +22,7 @@ public:
 
 	void SetShader(std::shared_ptr<Shader> _s) { shader = _s; }
 
-	void Render(glm::vec3 pos, glm::vec3 rot, float opacity);
+	void Render(const Configuration<glm::vec3>& configuration, float opacity);
 
 private:
 	void GenerateBuffors();
