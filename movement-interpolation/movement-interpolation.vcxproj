@@ -143,6 +143,7 @@
     <ClCompile Include="Engine\Animation.cpp" />
     <ClCompile Include="Engine\AnimationGui.cpp" />
     <ClCompile Include="Engine\AnimationView.cpp" />
+    <ClCompile Include="Engine\VectorConstants.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="ImGui\imgui.cpp" />
     <ClCompile Include="ImGui\imgui_chart.cpp" />
@@ -170,6 +171,8 @@
     <ClInclude Include="Engine\AnimationGui.h" />
     <ClInclude Include="Engine\AnimationModel.h" />
     <ClInclude Include="Engine\AnimationView.h" />
+    <ClInclude Include="Engine\Utils\QuaternionUtils.h" />
+    <ClInclude Include="Engine\VectorConstants.h" />
     <ClInclude Include="ImGui\imgui.h" />
     <ClInclude Include="ImGui\imgui_chart.h" />
     <ClInclude Include="ImGui\imgui_impl_glfw.h" />

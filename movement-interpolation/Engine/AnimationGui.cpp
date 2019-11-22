@@ -66,7 +66,7 @@ void AnimationGui::Render()
 	}
 
 	if (configurationChanged)
-		animation->RecalculateConfiguration(animationPercentage, intermediateFramesCount);
+		animation->RecalculateModels(animationPercentage, intermediateFramesCount);
 }
 
 void AnimationGui::PushDisabled()

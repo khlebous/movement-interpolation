@@ -46,6 +46,9 @@
     <Filter Include="Source Files\Engine\Animation">
       <UniqueIdentifier>{c472ff1d-5fd6-4752-8882-d4dd54eadf15}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Utils">
+      <UniqueIdentifier>{e441bf75-7d56-4108-bf06-360deca7da0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -110,6 +113,9 @@
     </ClCompile>
     <ClCompile Include="Engine\AnimationGui.cpp">
       <Filter>Source Files\Engine\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\VectorConstants.cpp">
+      <Filter>Source Files\Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="Engine\AnimationModelType.h">
       <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\VectorConstants.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utils\QuaternionUtils.h">
+      <Filter>Header Files\Engine\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

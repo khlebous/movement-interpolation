@@ -1,5 +1,6 @@
 #include "Engine.h"
 #include "Configuration.h"
+#include "Utils/QuaternionUtils.h"
 
 Engine::Engine() :
 	camera(std::make_shared<Camera>(glm::vec3(1.0f, 0.5f, 5.0f), -90.0f, 0.0f, glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f))),
@@ -15,9 +16,8 @@ Engine::Engine() :
 
 	glm::vec3 startPos = glm::vec3(0);
 	glm::vec3 startRot = glm::vec3(0);
-
 	glm::vec3 endPos = glm::vec3(4, 1, 0);
-	glm::vec3 endRot = glm::vec3(20, 30, 40);
+	glm::vec3 endRot = glm::vec3(0, 0, 0);
 
 	auto animationEulerModel = std::make_shared<AnimationModel<glm::vec3>>(
 		Configuration<glm::vec3>(startPos, startRot),
@@ -25,8 +25,8 @@ Engine::Engine() :
 	animationView->SetAnimationEulerModel(animationEulerModel);
 
 	auto animationQuatModel = std::make_shared<AnimationModel<glm::quat>>(
-		Configuration<glm::quat>(startPos, glm::quat(startRot)),
-		Configuration<glm::quat>(endPos, glm::quat(endRot)));
+		Configuration<glm::quat>(startPos, QuaternionUtils::EulerDegreeToQuaternion(startRot)),
+		Configuration<glm::quat>(endPos, QuaternionUtils::EulerDegreeToQuaternion(endRot)));
 	animationView->SetAnimationQuatModel(animationQuatModel);
 
 	animation->SetView(animationView);

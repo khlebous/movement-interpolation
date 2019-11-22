@@ -8,8 +8,8 @@ struct Configuration
 	glm::vec3 position;
 	T rotation;
 
-	Configuration() : position(glm::vec3(0)) { rotation = static_cast<T>(0); }
-	Configuration(glm::vec3 _p) : position(_p) { rotation = static_cast<T>(0); }
+	Configuration() : position(glm::vec3(0)) {  }
+	Configuration(glm::vec3 _p) : position(_p) {  }
 	Configuration(glm::vec3 _p, T _r) : position(_p), rotation(_r) { }
 
 	Configuration(const Configuration<T>& _c) : position(_c.position), rotation(_c.rotation) { }
