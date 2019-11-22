@@ -5,7 +5,7 @@
 #include "Configuration.h"
 
 template <typename T>
-class SimulationModel
+class AnimationModel
 {
 public:
 	Configuration<T> start;
@@ -13,6 +13,6 @@ public:
 	Configuration<T> current;
 	std::vector<Configuration<T>> intermediate;
 	
-	SimulationModel(Configuration<T> _s, Configuration<T> _e);
-	~SimulationModel() { }
+	AnimationModel(Configuration<T> _s, Configuration<T> _e) : start(_s), end(_e), current(_s) { }
+	~AnimationModel() { }
 };

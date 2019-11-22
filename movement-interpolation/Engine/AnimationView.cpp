@@ -1,6 +1,6 @@
-#include "SimulationView.h"
+#include "AnimationView.h"
 
-void SimulationView::Render()
+void AnimationView::Render()
 {
 	gameObject->Render(model->current, 1.0f);
 	gameObject->Render(model->start, 0.7f);

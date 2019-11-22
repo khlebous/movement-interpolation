@@ -43,7 +43,7 @@
     <Filter Include="Header Files\Engine\Simulation">
       <UniqueIdentifier>{38d4200f-1bbe-4925-a659-7c254613930a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Engine\Simulation">
+    <Filter Include="Source Files\Engine\Animation">
       <UniqueIdentifier>{c472ff1d-5fd6-4752-8882-d4dd54eadf15}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -99,20 +99,17 @@
     <ClCompile Include="Engine\Camera.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Simulation.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\SimulationView.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\SimulationModel.cpp">
-      <Filter>Source Files\Engine\Simulation</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\SimulationGui.cpp">
-      <Filter>Source Files\Engine\Gui</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Constnants\VectorConstants.cpp">
       <Filter>Source Files\Engine\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation.cpp">
+      <Filter>Source Files\Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AnimationView.cpp">
+      <Filter>Source Files\Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AnimationGui.cpp">
+      <Filter>Source Files\Engine\Gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -167,23 +164,23 @@
     <ClInclude Include="Engine\MovementDirection.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Simulation.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\SimulationView.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\SimulationModel.h">
-      <Filter>Header Files\Engine\Simulation</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\SimulationGui.h">
-      <Filter>Header Files\Engine\Gui</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Constnants\VectorConstants.h">
       <Filter>Header Files\Engine\Constants</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Configuration.h">
-      <Filter>Source Files\Engine\Simulation</Filter>
+      <Filter>Source Files\Engine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationModel.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationView.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationGui.h">
+      <Filter>Header Files\Engine\Gui</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

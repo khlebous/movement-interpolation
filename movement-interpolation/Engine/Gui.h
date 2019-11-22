@@ -3,17 +3,17 @@
 #include "..//ImGui/imgui.h"
 
 #include "CameraGui.h"
-#include "SimulationGui.h"
+#include "AnimationGui.h"
 
 class Gui
 {
 	std::shared_ptr<CameraGui> cameraGui;
-	std::shared_ptr<SimulationGui> simulationGui;
+	std::shared_ptr<AnimationGui> animationGui;
 	bool* showInspector = NULL;
 
 public:
 	void SetCameraGui(std::shared_ptr<CameraGui> _cg) { cameraGui = _cg; }
-	void SetSimulationGui(std::shared_ptr<SimulationGui> _sg) { simulationGui = _sg; }
+	void SetAnimationGui(std::shared_ptr<AnimationGui> _sg) { animationGui = _sg; }
 
 	void Render();
 };

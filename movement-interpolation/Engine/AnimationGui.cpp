@@ -2,34 +2,34 @@
 #define _CRT_SECURE_NO_WARNINGS
 #endif
 
-#include "SimulationGui.h"
+#include "AnimationGui.h"
 #include "..//ImGui/imgui_internal.h"
 
-SimulationGui::SimulationGui()
+AnimationGui::AnimationGui()
 {
 	animationPercentage = 0.0f;
 	intermediateFramesCount = 0;
 }
 
-void SimulationGui::Render()
+void AnimationGui::Render()
 {
-	std::shared_ptr<SimulationModel<glm::vec3>> model = simulation->GetModel();
+	std::shared_ptr<AnimationModel<glm::vec3>> model = animation->GetModel();
 
 	bool disabledPushed = false;
 	bool configurationChanged = false;
 	
-	if (simulation->isRunning)
+	if (animation->isRunning)
 	{
 		PushDisabled();
 		disabledPushed = true;
 
-		animationPercentage = simulation->currentTime / simulation->animationTime;
+		animationPercentage = animation->currentTime / animation->animationTime;
 	}
 
-	if (ImGui::DragFloat("animation time", &simulation->animationTime, 0.1f))
+	if (ImGui::DragFloat("animation time", &animation->animationTime, 0.1f))
 	{
-		if (simulation->animationTime < 0)
-			simulation->animationTime = 0;
+		if (animation->animationTime < 0)
+			animation->animationTime = 0;
 	}
 
 	if (ImGui::DragInt("intermediate framescount", &intermediateFramesCount, 1))
@@ -57,7 +57,7 @@ void SimulationGui::Render()
 
 	if (ImGui::Button("Start animation"))
 	{
-		simulation->StartAnimation();
+		animation->StartAnimation();
 	}
 
 	if (disabledPushed)
@@ -66,16 +66,16 @@ void SimulationGui::Render()
 	}
 
 	if (configurationChanged)
-		simulation->RecalculateConfiguration(animationPercentage, intermediateFramesCount);
+		animation->RecalculateConfiguration(animationPercentage, intermediateFramesCount);
 }
 
-void SimulationGui::PushDisabled()
+void AnimationGui::PushDisabled()
 {
 	ImGui::PushItemFlag(ImGuiItemFlags_Disabled, true);
 	ImGui::PushStyleVar(ImGuiStyleVar_Alpha, ImGui::GetStyle().Alpha * 0.5f);
 }
 
-void SimulationGui::PopDisabled()
+void AnimationGui::PopDisabled()
 {
 	ImGui::PopItemFlag();
 	ImGui::PopStyleVar();

@@ -1,14 +1,14 @@
 #pragma once
 #include <memory>
 
-#include "Simulation.h"
+#include "Animation.h"
 #include "Camera.h"
 #include "Shader.h"
 #include "Gui.h"
 
 class Engine
 {
-	std::shared_ptr<Simulation> simulation;
+	std::shared_ptr<Animation> animation;
 	std::shared_ptr<Camera> camera;
 	std::shared_ptr<Shader> shader;
 	std::shared_ptr<Gui> gui;

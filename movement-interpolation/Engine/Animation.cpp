@@ -1,13 +1,13 @@
-#include "Simulation.h"
+#include "Animation.h"
 
-Simulation::Simulation()
+Animation::Animation()
 {
 	isRunning = false;
 	animationTime = 3.0f;
 	currentTime = 0.0f;
 }
 
-void Simulation::Update(float deltaTime)
+void Animation::Update(float deltaTime)
 {
 	if (!isRunning)
 		return;
@@ -25,18 +25,18 @@ void Simulation::Update(float deltaTime)
 	eModel->current.rotation = (eModel->end.rotation - eModel->start.rotation) * timePercentage + eModel->start.rotation;
 }
 
-void Simulation::Render()
+void Animation::Render()
 {
 	view->Render();
 }
 
-void Simulation::StartAnimation()
+void Animation::StartAnimation()
 {
 	isRunning = true;
 	currentTime = 0.0f;
 }
 
-void Simulation::RecalculateConfiguration(float timePercentage, float intermediateFramesCount)
+void Animation::RecalculateConfiguration(float timePercentage, float intermediateFramesCount)
 {
 	eModel->current.position = (eModel->end.position - eModel->start.position) * timePercentage + eModel->start.position;
 	eModel->current.rotation = (eModel->end.rotation - eModel->start.rotation) * timePercentage + eModel->start.rotation;

@@ -8,7 +8,7 @@ void Gui::Render()
 	{
 		if (ImGui::BeginTabItem("Animation"))
 		{
-			simulationGui->Render();
+			animationGui->Render();
 
 			ImGui::EndTabItem();
 		}
