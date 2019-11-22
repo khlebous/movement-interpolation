@@ -30,4 +30,5 @@ void Simulation::StartAnimation()
 void Simulation::SetCurrentPosition(float timePercentage)
 {
 	model->currPos = (model->endPos - model->startPos) * timePercentage + model->startPos;
+	model->currRot = (model->endRot - model->startRot) * timePercentage + model->startRot;
 }

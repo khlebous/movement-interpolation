@@ -136,6 +136,7 @@
     <ClCompile Include="Engine\CameraGui.cpp" />
     <ClCompile Include="Engine\Constnants\ColorConstants.cpp" />
     <ClCompile Include="Engine\Constnants\ShaderConstants.cpp" />
+    <ClCompile Include="Engine\Constnants\VectorConstants.cpp" />
     <ClCompile Include="Engine\Constnants\WindowConstants.cpp" />
     <ClCompile Include="Engine\Engine.cpp" />
     <ClCompile Include="Engine\Gui.cpp" />
@@ -159,6 +160,7 @@
     <ClInclude Include="Engine\CameraGui.h" />
     <ClInclude Include="Engine\Constnants\ColorConstants.h" />
     <ClInclude Include="Engine\Constnants\ShaderConstants.h" />
+    <ClInclude Include="Engine\Constnants\VectorConstants.h" />
     <ClInclude Include="Engine\Constnants\WindowConstants.h" />
     <ClInclude Include="Engine\Engine.h" />
     <ClInclude Include="Engine\Gui.h" />

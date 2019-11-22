@@ -2,8 +2,8 @@
 
 void SimulationView::Render()
 {
-	gameObject->Render(model->currPos, 1.0f);
+	gameObject->Render(model->currPos, model->currRot, 1.0f);
 
-	gameObject->Render(model->startPos, 0.3f);
-	gameObject->Render(model->endPos, 0.3f);
+	gameObject->Render(model->startPos, model->startRot, 0.3f);
+	gameObject->Render(model->endPos, model->endRot, 0.3f);
 }

@@ -111,6 +111,9 @@
     <ClCompile Include="Engine\SimulationGui.cpp">
       <Filter>Source Files\Engine\Gui</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Constnants\VectorConstants.cpp">
+      <Filter>Source Files\Engine\Constants</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
@@ -175,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="Engine\SimulationGui.h">
       <Filter>Header Files\Engine\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Constnants\VectorConstants.h">
+      <Filter>Header Files\Engine\Constants</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

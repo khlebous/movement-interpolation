@@ -1,4 +1,5 @@
 #include "Axes.h"
+#include "Constnants/VectorConstants.h"
 
 Axes::Axes()
 {
@@ -14,10 +15,34 @@ Axes::~Axes()
 	glDeleteBuffers(1, &EBO);
 }
 
-void Axes::Render(glm::vec3 pos, float opacity)
+void Axes::Render(glm::vec3 pos, glm::vec3 rot, float opacity)
 {
 	shader->use();
-	shader->setMat4(ShaderConstants::MODEL_MTX, glm::translate(model, pos));
+
+	glm::mat4 m_model;
+
+	float rad_x = glm::radians(rot.x);
+	float s1 = glm::sin(rad_x);
+	float c1 = glm::cos(rad_x);
+	float rad_y = glm::radians(rot.y);
+	float s2 = glm::sin(rad_y);
+	float c2 = glm::cos(rad_y);
+	float rad_z = glm::radians(rot.z);
+	float s3 = glm::sin(rad_z);
+	float c3 = glm::cos(rad_z);
+
+	m_model = glm::transpose(glm::mat4(c2 * c3, -s2, c2 * s3, pos.x,
+		s1 * s3 + c1 * c3 * s2, c1 * c2, c1 * s2 * s3 - c3 * s1, pos.y,
+		c3 * s1 * s2 - c1 * s3, c2 * s1, c1 * c3 + s1 * s2 * s3, pos.z,
+		0, 0, 0, 1));
+
+	/*m_model = glm::translate(glm::mat4(1), pos);
+
+	m_model = glm::rotate(m_model, glm::radians(rot.x), VectorConstants::V_RIGHT);
+	m_model = glm::rotate(m_model, glm::radians(rot.y), VectorConstants::V_UP);
+	m_model = glm::rotate(m_model, glm::radians(rot.z), VectorConstants::V_FORWARD);*/
+
+	shader->setMat4(ShaderConstants::MODEL_MTX, m_model);
 	shader->setFloat(ShaderConstants::OPACITY, opacity);
 
 	glBindVertexArray(VAO);

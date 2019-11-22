@@ -45,7 +45,17 @@ void SimulationGui::Render()
 		simulation->SetCurrentPosition(animationPercentage);
 	}
 
+	if (ImGui::DragFloat3("start rotation", &model->startRot[0], 0.1f))
+	{
+		simulation->SetCurrentPosition(animationPercentage);
+	}
+
 	if (ImGui::DragFloat3("end pos", &model->endPos[0], 0.1f))
+	{
+		simulation->SetCurrentPosition(animationPercentage);
+	}
+
+	if (ImGui::DragFloat3("end rotation", &model->endRot[0], 0.1f))
 	{
 		simulation->SetCurrentPosition(animationPercentage);
 	}
