@@ -40,6 +40,15 @@
     <Filter Include="Source Files\Engine\Gui">
       <UniqueIdentifier>{d02e43d2-402a-491b-986e-319a5388f1f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Engine\Simulation">
+      <UniqueIdentifier>{38d4200f-1bbe-4925-a659-7c254613930a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine\Animation">
+      <UniqueIdentifier>{c472ff1d-5fd6-4752-8882-d4dd54eadf15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Engine\Utils">
+      <UniqueIdentifier>{e441bf75-7d56-4108-bf06-360deca7da0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -93,6 +102,21 @@
     <ClCompile Include="Engine\Camera.cpp">
       <Filter>Source Files\Engine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Constnants\VectorConstants.cpp">
+      <Filter>Source Files\Engine\Constants</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation.cpp">
+      <Filter>Source Files\Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AnimationView.cpp">
+      <Filter>Source Files\Engine\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\AnimationGui.cpp">
+      <Filter>Source Files\Engine\Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\VectorConstants.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ImGui\imgui.h">
@@ -122,9 +146,6 @@
     <ClInclude Include="Engine\Constnants\WindowConstants.h">
       <Filter>Header Files\Engine\Constants</Filter>
     </ClInclude>
-    <ClInclude Include="Axis.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Camera.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
@@ -148,6 +169,33 @@
     </ClInclude>
     <ClInclude Include="Engine\MovementDirection.h">
       <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Constnants\VectorConstants.h">
+      <Filter>Header Files\Engine\Constants</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Configuration.h">
+      <Filter>Source Files\Engine\Animation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationModel.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationView.h">
+      <Filter>Header Files\Engine\Simulation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationGui.h">
+      <Filter>Header Files\Engine\Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\AnimationModelType.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\VectorConstants.h">
+      <Filter>Source Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utils\QuaternionUtils.h">
+      <Filter>Header Files\Engine\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

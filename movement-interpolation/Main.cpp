@@ -82,6 +82,9 @@ int main()
 	glEnable(GL_PROGRAM_POINT_SIZE);
 	glEnable(GL_SCISSOR_TEST);
 	glLineWidth(5);
+	glEnable(GL_BLEND); //Enable blending.
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); //Set blending function.
+
 	//init
 	engine = std::make_shared<Engine>();
 
@@ -96,23 +99,23 @@ int main()
 		delta_time = currentFrame - last_frame;
 		last_frame = currentFrame;
 
+		engine->Update(delta_time);
+
 		glfwPollEvents();
+
+		// render
+		// ------
+		glScissor(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
+		glViewport(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
+		glClearColor(0.735f, 0.782f, 0.6f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		engine->Render(QUATERNION);
 
 		glScissor(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0);
 		glViewport(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
 		glClearColor(0.635f, 0.682f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-		// render
-		// ------
-		engine->Render(delta_time);
-
-		glScissor(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
-		glViewport(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
-		glClearColor(0.735f, 0.782f, 0.6f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		engine->Render(delta_time);
+		engine->Render(EULER);
 
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
