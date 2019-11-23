@@ -105,17 +105,17 @@ int main()
 
 		// render
 		// ------
-		glScissor(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0);
-		glViewport(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
-		glClearColor(0.635f, 0.682f, 0.6f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		engine->Render(EULER);
-
 		glScissor(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
 		glViewport(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
 		glClearColor(0.735f, 0.782f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		engine->Render(QUATERNION);
+
+		glScissor(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0);
+		glViewport(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
+		glClearColor(0.635f, 0.682f, 0.6f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		engine->Render(EULER);
 
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
