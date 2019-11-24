@@ -49,7 +49,7 @@ int main()
 		glfwTerminate();
 		return -1;
 	}
-	glfwMakeContextCurrent(window); 
+	glfwMakeContextCurrent(window);
 	glfwSwapInterval(1); // Enable vsync
 
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
@@ -109,13 +109,13 @@ int main()
 		glViewport(0, WindowConstants::HEIGHT / 2, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
 		glClearColor(0.735f, 0.782f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		engine->Render(QUATERNION);
+		engine->Render(EULER);
 
 		glScissor(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0);
 		glViewport(0, 0, WindowConstants::WIDTH, WindowConstants::HEIGHT / 2.0f);
 		glClearColor(0.635f, 0.682f, 0.6f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		engine->Render(EULER);
+		engine->Render(QUATERNION);
 
 		ImGui_ImplOpenGL2_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
@@ -131,7 +131,7 @@ int main()
 
 		// ImGui Rendering
 		engine->RenderGui();
-		
+
 		ImGui::Render();
 		ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 

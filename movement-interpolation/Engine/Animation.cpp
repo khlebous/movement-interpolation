@@ -40,44 +40,167 @@ void Animation::StartAnimation()
 	currentTime = 0.0f;
 }
 
-void Animation::RecalculateModels(float timePercentage, float intermediateFramesCount)
+void Animation::OnEulerStartRotationChanged()
 {
-	RecalculateEulerModel(timePercentage, intermediateFramesCount);
-	RecalculateQuaternionModel(timePercentage, intermediateFramesCount);
+	UpdateEulerCurrentRotation();
+	UpdateEulerIntermediateRotations();
+
+	SetQuaternionStartRotation(eModel->start.rotation);
 }
 
-void Animation::RecalculateEulerModel(float timePercentage, float intermediateFramesCount)
+void Animation::OnEulerEndRotationChanged()
 {
-	eModel->current.position = GetPosition(eModel->start.position, eModel->end.position, timePercentage);
-	eModel->current.rotation = GetEulerRotation(eModel->start.rotation, eModel->end.rotation, timePercentage);
+	UpdateEulerCurrentRotation();
+	UpdateEulerIntermediateRotations();
 
-	eModel->intermediate.resize(intermediateFramesCount);
+	SetQuaternionEndRotation(eModel->end.rotation);
+}
+
+void Animation::OnQuaternionStartRotationChanged()
+{
+	qModel->start.rotation = glm::normalize(qModel->start.rotation);
+
+	UpdateQuaternionCurrentRotation();
+	UpdateQuaternionIntermediateRotations();
+
+	SetEulerStartRotation(qModel->start.rotation);
+}
+
+void Animation::OnQuaternionEndRotationChanged()
+{
+	qModel->end.rotation = glm::normalize(qModel->end.rotation);
+
+	UpdateQuaternionCurrentRotation();
+	UpdateQuaternionIntermediateRotations();
+
+	SetEulerEndRotation(qModel->end.rotation);
+}
+
+void Animation::OnEulerStartPositionChanged()
+{
+	qModel->start.position = eModel->start.position;
+
+	float timePercentage = currentTime / animationTime;
+
+	UpdateCurrentConfigurations();
+	UpdateIntermediateConfigurations();
+}
+
+void Animation::OnEulerEndPositionChanged()
+{
+	qModel->end.position = eModel->end.position;
+
+	UpdateCurrentConfigurations();
+
+	size_t size = eModel->intermediate.size();
+	eModel->intermediate.resize(size);
+	qModel->intermediate.resize(size);
+	UpdateIntermediateConfigurations();
+}
+
+void Animation::SetIntermediateFrames(size_t size)
+{
+	eModel->intermediate.resize(size);
+	qModel->intermediate.resize(size);
+
+	UpdateIntermediateConfigurations();
+}
+
+void Animation::SetAnimationPercentage(float timePercentage)
+{
+	currentTime = timePercentage * animationTime;
+
+	UpdateCurrentConfigurations();
+}
+
+void Animation::UpdateCurrentConfigurations()
+{
+	float timePercentage = currentTime / animationTime;
+
+	eModel->current.position = GetPosition(eModel->start.position, eModel->end.position, timePercentage);
+	UpdateEulerCurrentRotation();
+
+	qModel->current.position = eModel->current.position;
+	UpdateQuaternionCurrentRotation();
+}
+
+void Animation::UpdateIntermediateConfigurations()
+{
+	size_t size = eModel->intermediate.size();
+	for (size_t i = 0; i < size; i++)
+	{
+		float timePercentage = (float)(i + 1) / (size + 1);
+
+		eModel->intermediate[i].position = GetPosition(eModel->start.position, eModel->end.position, timePercentage);
+		qModel->intermediate[i].position = eModel->intermediate[i].position;
+	}
+
+	UpdateEulerIntermediateRotations();
+	UpdateQuaternionIntermediateRotations();
+}
+
+void Animation::UpdateEulerCurrentRotation()
+{
+	eModel->current.rotation = GetEulerRotation(eModel->start.rotation, eModel->end.rotation, currentTime / animationTime);
+}
+
+void Animation::UpdateEulerIntermediateRotations()
+{
+	size_t intermediateFramesCount = eModel->intermediate.size();
 	for (size_t i = 0; i < intermediateFramesCount; i++)
 	{
 		float timePercentage = (i + 1.0f) / (intermediateFramesCount + 1.0f);
-		eModel->intermediate[i].position = GetPosition(eModel->start.position, eModel->end.position, timePercentage);
 		eModel->intermediate[i].rotation = GetEulerRotation(eModel->start.rotation, eModel->end.rotation, timePercentage);
 	}
 }
 
-void Animation::RecalculateQuaternionModel(float timePercentage, float intermediateFramesCount)
+void Animation::UpdateQuaternionCurrentRotation()
 {
-	qModel->start.position = eModel->start.position;
-	qModel->start.rotation = QuaternionUtils::EulerDegreeToQuaternion(eModel->start.rotation);
+	qModel->current.rotation = Lerp(qModel->start.rotation, qModel->end.rotation, currentTime / animationTime);
+}
 
-	qModel->end.position = eModel->end.position;
-	qModel->end.rotation = QuaternionUtils::EulerDegreeToQuaternion(eModel->end.rotation);
-
-	qModel->current.position = eModel->current.position;
-	qModel->current.rotation = Lerp(qModel->start.rotation, qModel->end.rotation, timePercentage);
-
-	qModel->intermediate.resize(intermediateFramesCount);
+void Animation::UpdateQuaternionIntermediateRotations()
+{
+	size_t intermediateFramesCount = qModel->intermediate.size();
 	for (size_t i = 0; i < intermediateFramesCount; i++)
 	{
 		float timePercentage = (i + 1.0f) / (intermediateFramesCount + 1.0f);
-		qModel->intermediate[i].position = eModel->intermediate[i].position;
 		qModel->intermediate[i].rotation = Lerp(qModel->start.rotation, qModel->end.rotation, timePercentage);
 	}
+}
+
+void Animation::SetQuaternionEndRotation(glm::vec3 e)
+{
+	qModel->end.rotation = QuaternionUtils::EulerDegreeToQuaternion(e);
+
+	UpdateQuaternionCurrentRotation();
+	UpdateQuaternionIntermediateRotations();
+}
+
+void Animation::SetQuaternionStartRotation(glm::vec3 e)
+{
+	qModel->start.rotation = QuaternionUtils::EulerDegreeToQuaternion(e);
+
+	UpdateQuaternionCurrentRotation();
+	UpdateQuaternionIntermediateRotations();
+}
+
+void Animation::SetEulerStartRotation(glm::quat q)
+{
+	glm::vec3 eRotation = glm::degrees(glm::eulerAngles(q));
+	eModel->start.rotation = glm::vec3(eRotation.y, eRotation.x, eRotation.z);
+
+	UpdateEulerCurrentRotation();
+	UpdateEulerIntermediateRotations();
+}
+
+void Animation::SetEulerEndRotation(glm::quat q)
+{
+	glm::vec3 eRotation = glm::degrees(glm::eulerAngles(q));
+	eModel->end.rotation = glm::vec3(eRotation.y, eRotation.x, eRotation.z);
+
+	UpdateEulerCurrentRotation();
+	UpdateEulerIntermediateRotations();
 }
 
 glm::vec3 Animation::GetPosition(glm::vec3 startPos, glm::vec3 endPos, float timePercentage)

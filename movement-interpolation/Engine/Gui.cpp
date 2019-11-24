@@ -2,24 +2,28 @@
 
 void Gui::Render()
 {
-	ImGui::Begin("Inspector", showInspector);
-
-	if (ImGui::BeginTabBar("InspectoeTabBar", ImGuiTabBarFlags_None))
+	ImGui::BeginMainMenuBar();
+	
+	if (ImGui::BeginMenu("Animation"))
 	{
-		if (ImGui::BeginTabItem("Animation"))
-		{
-			animationGui->Render();
-
-			ImGui::EndTabItem();
-		}
-		if (ImGui::BeginTabItem("Camera"))
-		{
-			cameraGui->Render();
-
-			ImGui::EndTabItem();
-		}
-		ImGui::EndTabBar();
+		animationGui->RenderMenu();
+		ImGui::EndMenu();
 	}
 
-	ImGui::End();
+	ImGui::Text(" | ");
+
+	if (ImGui::BeginMenu("Camera"))
+	{
+		cameraGui->Render();
+		ImGui::EndMenu();
+	}
+	
+	ImGui::Text(" | ");
+
+	ImGuiIO& io = ImGui::GetIO();
+	ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / io.Framerate, io.Framerate);
+
+	ImGui::EndMainMenuBar();
+
+	animationGui->Render();
 }

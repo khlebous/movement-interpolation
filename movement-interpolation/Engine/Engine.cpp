@@ -17,7 +17,7 @@ Engine::Engine() :
 	glm::vec3 startPos = glm::vec3(0);
 	glm::vec3 startRot = glm::vec3(0);
 	glm::vec3 endPos = glm::vec3(4, 1, 0);
-	glm::vec3 endRot = glm::vec3(0, 0, 0);
+	glm::vec3 endRot = glm::vec3(90, 45, 0);
 
 	auto animationEulerModel = std::make_shared<AnimationModel<glm::vec3>>(
 		Configuration<glm::vec3>(startPos, startRot),
