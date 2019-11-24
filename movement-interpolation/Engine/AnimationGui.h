@@ -11,6 +11,9 @@ class AnimationGui
 	bool* showEuler = NULL;
 	bool* showQuaternion = NULL;
 
+	glm::quat qStartRot;
+	glm::quat qEndRot;
+
 public:
 	AnimationGui();
 	~AnimationGui() 

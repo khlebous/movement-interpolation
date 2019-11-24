@@ -4,6 +4,9 @@
 
 AnimationGui::AnimationGui()
 {
+	qStartRot = glm::quat(glm::vec3(0));
+	qEndRot = glm::quat(glm::vec3(0));
+
 	animationPercentage = 0.0f;
 	intermediateFramesCount = 0;
 }
@@ -11,7 +14,7 @@ AnimationGui::AnimationGui()
 void AnimationGui::RenderMenu()
 {
 	bool disabledPushed = false;
-	
+
 	if (animation->isRunning)
 	{
 		PushDisabled();
@@ -37,7 +40,7 @@ void AnimationGui::RenderMenu()
 	if (ImGui::SliderFloat("##animation_percentage", &animationPercentage, 0, 1.0f))
 		animation->SetAnimationPercentage(animationPercentage);
 
-	
+
 	ImGui::Spacing();
 
 	if (ImGui::Button("Start animation"))
@@ -106,6 +109,36 @@ void AnimationGui::RenderQuaternionWindow()
 	if (ImGui::DragFloat4("end rot q", &qModel->end.rotation[0], 0.01f))
 		animation->OnQuaternionEndRotationChanged();
 
+	ImGui::Spacing();
+
+	if (ImGui::RadioButton("LERP", animation->qRotType == LERP))
+	{
+		animation->qRotType = LERP;
+		animation->OnQuaternionInterpolationTypeChanged();
+	}
+	if (ImGui::RadioButton("SLERP", animation->qRotType == SLERP))
+	{
+		animation->qRotType = SLERP;
+		animation->OnQuaternionInterpolationTypeChanged();
+	}
+	
+	ImGui::Spacing();
+
+	ImGui::DragFloat4("gui start rot q", &qStartRot[0], 0.01f);
+	if (ImGui::Button("Apply start rot q"))
+	{
+		qStartRot = glm::normalize(qStartRot);
+		qModel->start.rotation = qStartRot;;
+		animation->OnQuaternionStartRotationChanged();
+	}
+
+	ImGui::DragFloat4("qui end rot q", &qEndRot[0], 0.01f);
+	if (ImGui::Button("Apply end rot q"))
+	{
+		qEndRot = glm::normalize(qEndRot);
+		qModel->end.rotation = qEndRot;;
+		animation->OnQuaternionEndRotationChanged();
+	}
 
 	ImGui::End();
 }

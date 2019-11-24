@@ -172,6 +172,7 @@
     <ClInclude Include="Engine\AnimationGui.h" />
     <ClInclude Include="Engine\AnimationModel.h" />
     <ClInclude Include="Engine\AnimationView.h" />
+    <ClInclude Include="Engine\QuaternionRotationType.h" />
     <ClInclude Include="Engine\Utils\EulerAnglesLimitsUtils.h" />
     <ClInclude Include="Engine\Utils\QuaternionUtils.h" />
     <ClInclude Include="Engine\VectorConstants.h" />

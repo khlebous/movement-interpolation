@@ -206,6 +206,9 @@
     <ClInclude Include="Engine\Utils\EulerAnglesLimitsUtils.h">
       <Filter>Header Files\Engine\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\QuaternionRotationType.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\Resources\Shaders\PointerShader.fs">

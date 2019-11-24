@@ -7,6 +7,7 @@ Animation::Animation()
 	isRunning = false;
 	animationTime = 3.0f;
 	currentTime = 0.0f;
+	qRotType = LERP;
 }
 
 void Animation::Update(float deltaTime)
@@ -27,7 +28,7 @@ void Animation::Update(float deltaTime)
 	eModel->current.rotation = GetEulerRotation(eModel->start.rotation, eModel->end.rotation, timePercentage);
 
 	qModel->current.position = eModel->current.position;
-	qModel->current.rotation = Lerp(qModel->start.rotation, qModel->end.rotation, timePercentage);
+	qModel->current.rotation = GetQuaternionRotation(qModel->start.rotation, qModel->end.rotation, timePercentage);
 }
 
 void Animation::Render(AnimationModelType type)
@@ -163,7 +164,7 @@ void Animation::UpdateEulerIntermediateRotations()
 
 void Animation::UpdateQuaternionCurrentRotation()
 {
-	qModel->current.rotation = Lerp(qModel->start.rotation, qModel->end.rotation, currentTime / animationTime);
+	qModel->current.rotation = GetQuaternionRotation(qModel->start.rotation, qModel->end.rotation, currentTime / animationTime);
 }
 
 void Animation::UpdateQuaternionIntermediateRotations()
@@ -172,11 +173,11 @@ void Animation::UpdateQuaternionIntermediateRotations()
 	for (size_t i = 0; i < intermediateFramesCount; i++)
 	{
 		float timePercentage = (i + 1.0f) / (intermediateFramesCount + 1.0f);
-		qModel->intermediate[i].rotation = Lerp(qModel->start.rotation, qModel->end.rotation, timePercentage);
+		qModel->intermediate[i].rotation = GetQuaternionRotation(qModel->start.rotation, qModel->end.rotation, timePercentage);
 	}
 }
 
-void Animation::SetQuaternionEndRotation(glm::vec3 e)
+void Animation::SetQuaternionEndRotation(const glm::vec3& e)
 {
 	qModel->end.rotation = QuaternionUtils::EulerDegreeToQuaternion(e);
 
@@ -184,7 +185,7 @@ void Animation::SetQuaternionEndRotation(glm::vec3 e)
 	UpdateQuaternionIntermediateRotations();
 }
 
-void Animation::SetQuaternionStartRotation(glm::vec3 e)
+void Animation::SetQuaternionStartRotation(const glm::vec3& e)
 {
 	qModel->start.rotation = QuaternionUtils::EulerDegreeToQuaternion(e);
 
@@ -192,7 +193,7 @@ void Animation::SetQuaternionStartRotation(glm::vec3 e)
 	UpdateQuaternionIntermediateRotations();
 }
 
-void Animation::SetEulerStartRotation(glm::quat q)
+void Animation::SetEulerStartRotation(const glm::quat& q)
 {
 	glm::vec3 eRotation = glm::degrees(glm::eulerAngles(q));
 	eModel->start.rotation = glm::vec3(eRotation.y, eRotation.x, eRotation.z);
@@ -201,7 +202,7 @@ void Animation::SetEulerStartRotation(glm::quat q)
 	UpdateEulerIntermediateRotations();
 }
 
-void Animation::SetEulerEndRotation(glm::quat q)
+void Animation::SetEulerEndRotation(const glm::quat& q)
 {
 	glm::vec3 eRotation = glm::degrees(glm::eulerAngles(q));
 	eModel->end.rotation = glm::vec3(eRotation.y, eRotation.x, eRotation.z);
@@ -210,12 +211,12 @@ void Animation::SetEulerEndRotation(glm::quat q)
 	UpdateEulerIntermediateRotations();
 }
 
-glm::vec3 Animation::GetPosition(glm::vec3 startPos, glm::vec3 endPos, float timePercentage)
+glm::vec3 Animation::GetPosition(const glm::vec3& startPos, const glm::vec3& endPos, float timePercentage)
 {
 	return (endPos - startPos) * timePercentage + startPos;
 }
 
-glm::vec3 Animation::GetEulerRotation(glm::vec3 startRot, glm::vec3 endRot, float timePercentage)
+glm::vec3 Animation::GetEulerRotation(const glm::vec3& startRot, const glm::vec3& endRot, float timePercentage)
 {
 	glm::vec3 diffAbs = glm::abs(endRot - startRot);
 	float maxAngle = 360.0f;
@@ -245,13 +246,16 @@ glm::vec3 Animation::GetEulerRotation(glm::vec3 startRot, glm::vec3 endRot, floa
 	return (diff) * timePercentage + startRot;
 }
 
-glm::quat Animation::Lerp(glm::quat startRot, glm::quat endRot, float timePercentage)
+glm::quat Animation::GetQuaternionRotation(const glm::quat& startRot, const glm::quat& endRot, float timePercentage)
 {
-	return glm::lerp(startRot, endRot, timePercentage);
-}
+	glm::quat q;
 
-glm::quat Animation::Slerp(glm::quat startRot, glm::quat endRot, float timePercentage)
-{
-	return glm::slerp(startRot, endRot, timePercentage);
+	switch (qRotType)
+	{
+	case LERP: q = QuaternionUtils::Lerp(startRot, endRot, timePercentage); break;
+	case SLERP: q = QuaternionUtils::Slerp(startRot, endRot, timePercentage); break;
+	default: break;
+	}
 
+	return glm::normalize(q);
 }

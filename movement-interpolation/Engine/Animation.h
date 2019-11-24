@@ -1,6 +1,7 @@
 #pragma once
 #include "AnimationView.h"
 #include "Utils/QuaternionUtils.h"
+#include "QuaternionRotationType.h"
 
 class Animation
 {
@@ -12,6 +13,7 @@ public:
 	bool isRunning;
 	float animationTime;
 	float currentTime;
+	QuaternionRotationType qRotType;
 
 	Animation();
 
@@ -37,6 +39,12 @@ public:
 	void SetIntermediateFrames(size_t size);
 	void SetAnimationPercentage(float timePercentage);
 
+	void OnQuaternionInterpolationTypeChanged()
+	{
+		UpdateQuaternionCurrentRotation();
+		UpdateQuaternionIntermediateRotations();
+	}
+
 private:
 	void UpdateCurrentConfigurations();
 	void UpdateIntermediateConfigurations();
@@ -45,13 +53,12 @@ private:
 	void UpdateQuaternionCurrentRotation();
 	void UpdateQuaternionIntermediateRotations();
 
-	void SetQuaternionEndRotation(glm::vec3 e);
-	void SetQuaternionStartRotation(glm::vec3 e);
-	void SetEulerStartRotation(glm::quat q);
-	void SetEulerEndRotation(glm::quat q);
+	void SetQuaternionEndRotation(const glm::vec3& e);
+	void SetQuaternionStartRotation(const glm::vec3& e);
+	void SetEulerStartRotation(const glm::quat& q);
+	void SetEulerEndRotation(const glm::quat& q);
 
-	glm::vec3 GetPosition(glm::vec3 startPos, glm::vec3 endPos, float timePercentage);
-	glm::vec3 GetEulerRotation(glm::vec3 startRot, glm::vec3 endRot, float timePercentage);
-	glm::quat Lerp(glm::quat startRot, glm::quat endRot, float timePercentage);
-	glm::quat Slerp(glm::quat startRot, glm::quat endRot, float timePercentage);
+	glm::vec3 GetPosition(const glm::vec3& startPos, const glm::vec3& endPos, float timePercentage);
+	glm::vec3 GetEulerRotation(const glm::vec3& startRot, const glm::vec3& endRot, float timePercentage);
+	glm::quat GetQuaternionRotation(const glm::quat& startRot, const glm::quat& endRot, float timePercentage);
 };
