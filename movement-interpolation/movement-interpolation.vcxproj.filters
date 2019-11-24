@@ -49,6 +49,9 @@
     <Filter Include="Header Files\Engine\Utils">
       <UniqueIdentifier>{e441bf75-7d56-4108-bf06-360deca7da0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Engine\Utils">
+      <UniqueIdentifier>{24645838-5e8f-4143-ade3-3257e7ac6feb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="Engine\VectorConstants.cpp">
       <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utils\EulerAnglesLimitsUtils.cpp">
+      <Filter>Source Files\Engine\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +201,9 @@
       <Filter>Source Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utils\QuaternionUtils.h">
+      <Filter>Header Files\Engine\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utils\EulerAnglesLimitsUtils.h">
       <Filter>Header Files\Engine\Utils</Filter>
     </ClInclude>
   </ItemGroup>

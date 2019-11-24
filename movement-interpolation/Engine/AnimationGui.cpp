@@ -69,7 +69,7 @@ void AnimationGui::PopDisabled()
 
 void AnimationGui::RenderEulerWindow()
 {
-	ImGui::Begin("Euler", showEuler, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+	ImGui::Begin("Euler settings", showEuler, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
 	ImGui::SetWindowSize(ImVec2(WindowConstants::UI_WIDTH, WindowConstants::UI_HEIGHT()));
 	ImGui::SetWindowPos(ImVec2(WindowConstants::EULER_UI_X(), WindowConstants::EULER_UI_Y()));
 
@@ -94,7 +94,7 @@ void AnimationGui::RenderEulerWindow()
 
 void AnimationGui::RenderQuaternionWindow()
 {
-	ImGui::Begin("Quaternions", showEuler, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+	ImGui::Begin("Quaternion settings", showEuler, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
 	ImGui::SetWindowSize(ImVec2(WindowConstants::UI_WIDTH, WindowConstants::UI_HEIGHT()));
 	ImGui::SetWindowPos(ImVec2(WindowConstants::QUATERNION_UI_X(), WindowConstants::QUATERNION_UI_Y()));
 
