@@ -1,9 +1,6 @@
-#if defined(_MSC_VER) && !defined(_CRT_SECURE_NO_WARNINGS)
-#define _CRT_SECURE_NO_WARNINGS
-#endif
-
 #include "AnimationGui.h"
 #include "..//ImGui/imgui_internal.h"
+#include "Constnants/WindowConstants.h"
 
 AnimationGui::AnimationGui()
 {
@@ -11,11 +8,8 @@ AnimationGui::AnimationGui()
 	intermediateFramesCount = 0;
 }
 
-void AnimationGui::Render()
+void AnimationGui::RenderMenu()
 {
-	std::shared_ptr<AnimationModel<glm::vec3>> eModel = animation->GetEulerModel();
-	std::shared_ptr<AnimationModel<glm::quat>> qModel = animation->GetQuaternionModel();
-
 	bool disabledPushed = false;
 	
 	if (animation->isRunning)
@@ -43,28 +37,8 @@ void AnimationGui::Render()
 	if (ImGui::SliderFloat("##animation_percentage", &animationPercentage, 0, 1.0f))
 		animation->SetAnimationPercentage(animationPercentage);
 
-	if (ImGui::DragFloat3("start pos", &eModel->start.position[0], 0.1f))
-		animation->OnEulerStartPositionChanged();
-	
-	if (ImGui::DragFloat3("end pos", &eModel->end.position[0], 0.1f))
-		animation->OnEulerEndPositionChanged();
 	
 	ImGui::Spacing();
-
-	if (ImGui::DragFloat3("start rotation", &eModel->start.rotation[0], 0.1f))
-		animation->OnEulerStartRotationChanged();
-
-	if (ImGui::DragFloat3("end rotation", &eModel->end.rotation[0], 0.1f))
-		animation->OnEulerEndRotationChanged();
-
-	ImGui::Spacing();
-
-	if (ImGui::DragFloat4("start rot q", &qModel->start.rotation[0], 0.01f))
-		animation->OnQuaternionStartRotationChanged();
-
-	if (ImGui::DragFloat4("end rot q", &qModel->end.rotation[0], 0.01f))
-		animation->OnQuaternionEndRotationChanged();
-
 
 	if (ImGui::Button("Start animation"))
 		animation->StartAnimation();
@@ -73,6 +47,12 @@ void AnimationGui::Render()
 	{
 		PopDisabled();
 	}
+}
+
+void AnimationGui::Render()
+{
+	RenderEulerWindow();
+	RenderQuaternionWindow();
 }
 
 void AnimationGui::PushDisabled()
@@ -85,4 +65,47 @@ void AnimationGui::PopDisabled()
 {
 	ImGui::PopItemFlag();
 	ImGui::PopStyleVar();
+}
+
+void AnimationGui::RenderEulerWindow()
+{
+	ImGui::Begin("Euler", showEuler, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+	ImGui::SetWindowSize(ImVec2(WindowConstants::UI_WIDTH, WindowConstants::UI_HEIGHT()));
+	ImGui::SetWindowPos(ImVec2(WindowConstants::EULER_UI_X(), WindowConstants::EULER_UI_Y()));
+
+	std::shared_ptr<AnimationModel<glm::vec3>> eModel = animation->GetEulerModel();
+
+	if (ImGui::DragFloat3("start pos", &eModel->start.position[0], 0.1f))
+		animation->OnEulerStartPositionChanged();
+
+	if (ImGui::DragFloat3("end pos", &eModel->end.position[0], 0.1f))
+		animation->OnEulerEndPositionChanged();
+
+	ImGui::Spacing();
+
+	if (ImGui::DragFloat3("start rotation", &eModel->start.rotation[0], 0.1f))
+		animation->OnEulerStartRotationChanged();
+
+	if (ImGui::DragFloat3("end rotation", &eModel->end.rotation[0], 0.1f))
+		animation->OnEulerEndRotationChanged();
+
+	ImGui::End();
+}
+
+void AnimationGui::RenderQuaternionWindow()
+{
+	ImGui::Begin("Quaternions", showEuler, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse);
+	ImGui::SetWindowSize(ImVec2(WindowConstants::UI_WIDTH, WindowConstants::UI_HEIGHT()));
+	ImGui::SetWindowPos(ImVec2(WindowConstants::QUATERNION_UI_X(), WindowConstants::QUATERNION_UI_Y()));
+
+	std::shared_ptr<AnimationModel<glm::quat>> qModel = animation->GetQuaternionModel();
+
+	if (ImGui::DragFloat4("start rot q", &qModel->start.rotation[0], 0.01f))
+		animation->OnQuaternionStartRotationChanged();
+
+	if (ImGui::DragFloat4("end rot q", &qModel->end.rotation[0], 0.01f))
+		animation->OnQuaternionEndRotationChanged();
+
+
+	ImGui::End();
 }
