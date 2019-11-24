@@ -143,6 +143,7 @@
     <ClCompile Include="Engine\Animation.cpp" />
     <ClCompile Include="Engine\AnimationGui.cpp" />
     <ClCompile Include="Engine\AnimationView.cpp" />
+    <ClCompile Include="Engine\Utils\EulerAnglesLimitsUtils.cpp" />
     <ClCompile Include="Engine\VectorConstants.cpp" />
     <ClCompile Include="glad.c" />
     <ClCompile Include="ImGui\imgui.cpp" />
@@ -171,6 +172,7 @@
     <ClInclude Include="Engine\AnimationGui.h" />
     <ClInclude Include="Engine\AnimationModel.h" />
     <ClInclude Include="Engine\AnimationView.h" />
+    <ClInclude Include="Engine\Utils\EulerAnglesLimitsUtils.h" />
     <ClInclude Include="Engine\Utils\QuaternionUtils.h" />
     <ClInclude Include="Engine\VectorConstants.h" />
     <ClInclude Include="ImGui\imgui.h" />
