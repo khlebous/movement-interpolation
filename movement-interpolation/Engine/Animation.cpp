@@ -217,7 +217,32 @@ glm::vec3 Animation::GetPosition(glm::vec3 startPos, glm::vec3 endPos, float tim
 
 glm::vec3 Animation::GetEulerRotation(glm::vec3 startRot, glm::vec3 endRot, float timePercentage)
 {
-	return (endRot - startRot) * timePercentage + startRot;
+	glm::vec3 diffAbs = glm::abs(endRot - startRot);
+	float maxAngle = 360.0f;
+
+	auto getValue = [maxAngle] (float endRotValue, float startRotValue, float diffValue)
+	{
+		if (endRotValue > startRotValue)
+		{
+			if (diffValue < maxAngle - diffValue)
+				return diffValue;
+			else
+				return diffValue - maxAngle;
+		}
+		else
+		{
+			if (diffValue < maxAngle - diffValue)
+				return -diffValue;
+			else
+				return maxAngle - diffValue;
+		}
+	};
+
+	glm::vec3 diff(getValue(endRot.x, startRot.x, diffAbs.x),
+		getValue(endRot.y, startRot.y, diffAbs.y),
+		getValue(endRot.z, startRot.z, diffAbs.z));
+
+	return (diff) * timePercentage + startRot;
 }
 
 glm::quat Animation::Lerp(glm::quat startRot, glm::quat endRot, float timePercentage)
