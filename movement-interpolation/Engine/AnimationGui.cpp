@@ -106,6 +106,17 @@ void AnimationGui::RenderQuaternionWindow()
 	if (ImGui::DragFloat4("end rot q", &qModel->end.rotation[0], 0.01f))
 		animation->OnQuaternionEndRotationChanged();
 
+	ImGui::Spacing();
 
+	if (ImGui::RadioButton("LERP", animation->qRotType == LERP))
+	{
+		animation->qRotType = LERP;
+		animation->OnQuaternionInterpolationTypeChanged();
+	}
+	if (ImGui::RadioButton("SLERP", animation->qRotType == SLERP))
+	{
+		animation->qRotType = SLERP;
+		animation->OnQuaternionInterpolationTypeChanged();
+	}
 	ImGui::End();
 }
