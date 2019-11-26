@@ -17,7 +17,15 @@ public:
 
 	static glm::quat Lerp(const glm::quat & q1, const glm::quat& q2, float t)
 	{
-		return q1 * (1 - t) + q2 * t;
+		float cosTheta = glm::dot(q1, q2);
+		glm::quat q3 = q2;
+
+		if (cosTheta < 0.0f)
+		{
+			q3 = -q2;
+		}
+
+		return q1 * (1 - t) + q3 * t;
 	}
 
 	static glm::quat Slerp(const glm::quat& q1, const glm::quat& q2, float t)

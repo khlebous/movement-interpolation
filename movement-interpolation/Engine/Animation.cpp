@@ -243,7 +243,7 @@ glm::vec3 Animation::GetEulerRotation(const glm::vec3& startRot, const glm::vec3
 		getValue(endRot.y, startRot.y, diffAbs.y),
 		getValue(endRot.z, startRot.z, diffAbs.z));
 
-	return (diff) * timePercentage + startRot;
+	return diff * timePercentage + startRot;
 }
 
 glm::quat Animation::GetQuaternionRotation(const glm::quat& startRot, const glm::quat& endRot, float timePercentage)
